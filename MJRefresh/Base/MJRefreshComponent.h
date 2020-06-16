@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, MJRefreshState) {
     MJRefreshStateNoMoreData
 };
 
+// 学习标注废弃的宏定义
 /** 进入刷新状态的回调 */
 typedef void (^MJRefreshComponentRefreshingBlock)(void) MJRefreshDeprecated("first deprecated in 3.3.0 - Use `MJRefreshComponentAction` instead");
 /** 开始刷新后的回调(进入刷新状态后的回调) */
@@ -46,7 +47,7 @@ typedef void (^MJRefreshComponentAction)(void);
     /** 记录scrollView刚开始的inset */
     UIEdgeInsets _scrollViewOriginalInset;
     /** 父控件 */
-    __weak UIScrollView *_scrollView;
+    __weak UIScrollView *_scrollView; // weak!
 }
 #pragma mark - 刷新回调
 /** 正在刷新的回调 */
@@ -88,6 +89,15 @@ typedef void (^MJRefreshComponentAction)(void);
 @property (weak, nonatomic, readonly) UIScrollView *scrollView;
 
 #pragma mark - 交给子类们去实现
+
+// 学习修饰符 NS_REQUIRES_SUPER
+// 用来修饰所有方法，表示子类override父类的方法时，必须在方法内部调用super的这个方法。
+// 如果子类真的不想去调用super用NS_REQUIRES_SUPER修饰的方法，又不想出现警告，那么可以用下面的方式处理
+// #pragma clang diagnostic push
+// #pragma clang diagnostic ignored "-Wobjc-missing-super-calls"
+// 方法实现
+// #pragma clang diagnostic pop
+
 /** 初始化 */
 - (void)prepare NS_REQUIRES_SUPER;
 /** 摆放子控件frame */

@@ -35,6 +35,9 @@
     self.backgroundColor = [UIColor clearColor];
 }
 
+// You should not call this method directly.
+// If you want to force a layout update, call the setNeedsLayout method instead to do so prior to the next drawing update.
+// If you want to update the layout of your views immediately, call the layoutIfNeeded method.
 - (void)layoutSubviews
 {
     [self placeSubviews];
@@ -135,7 +138,8 @@
 - (void)setState:(MJRefreshState)state
 {
     _state = state;
-    
+
+    // 这个需要学习 
     // 加入主队列的目的是等setState:方法调用完毕、设置完文字后再去布局子控件
     MJRefreshDispatchAsyncOnMainQueue([self setNeedsLayout];)
 }

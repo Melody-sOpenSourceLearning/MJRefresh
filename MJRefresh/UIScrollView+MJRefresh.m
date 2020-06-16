@@ -23,7 +23,8 @@ static const char MJRefreshHeaderKey = '\0';
         // 删除旧的，添加新的
         [self.mj_header removeFromSuperview];
         [self insertSubview:mj_header atIndex:0];
-        
+
+        // associated object
         // 存储新的
         objc_setAssociatedObject(self, &MJRefreshHeaderKey,
                                  mj_header, OBJC_ASSOCIATION_RETAIN);

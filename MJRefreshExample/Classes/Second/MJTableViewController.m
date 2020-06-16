@@ -37,6 +37,7 @@ static const CGFloat MJDuration = 2.0;
 #pragma mark UITableView + 下拉刷新 默认
 - (void)example01
 {
+    // 循环引用
     __weak __typeof(self) weakSelf = self;
     
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
@@ -375,6 +376,8 @@ static const CGFloat MJDuration = 2.0;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+
+    // 学习了 这种方式非常简洁 适合模版类代码
     MJPerformSelectorLeakWarning(
         [self performSelector:NSSelectorFromString(self.method) withObject:nil];
                                  );

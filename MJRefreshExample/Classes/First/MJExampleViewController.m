@@ -16,6 +16,8 @@
 #import "MJRefresh.h"
 #import "MJWKWebViewController.h"
 
+// TableView 和 CollectionView 都是基于 ScrollView 的
+// WebView 是基于 UIView，header 是加在其关联的 ScrollView
 static NSString *const MJExample00 = @"UITableView + 下拉刷新";
 static NSString *const MJExample10 = @"UITableView + 上拉刷新";
 static NSString *const MJExample20 = @"UICollectionView";
@@ -32,6 +34,7 @@ static NSString *const MJExample40 = @"WKWebView";
 {
     if (!_examples) {
         MJExample *exam0 = [[MJExample alloc] init];
+        // vcClass 和 methods 这种参数赋值方法可以学习
         exam0.header = MJExample00;
         exam0.vcClass = [MJTableViewController class];
         exam0.titles = @[@"默认", @"动画图片", @"隐藏时间", @"隐藏状态和时间", @"自定义文字", @"自定义刷新控件"];
@@ -70,7 +73,8 @@ static NSString *const MJExample40 = @"WKWebView";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    // 避免循环引用造成内存泄漏
     __unsafe_unretained UITableView *tableView = self.tableView;
     
     // 下拉刷新

@@ -26,6 +26,9 @@
 
 - (void)close
 {
+    // 判断是 push 还是 present
+    // 关注 presentingViewController presentedViewController
+    // - (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion;
     if (self.presentingViewController) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
